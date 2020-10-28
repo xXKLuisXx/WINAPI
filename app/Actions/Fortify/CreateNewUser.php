@@ -16,14 +16,14 @@ class CreateNewUser implements CreatesNewUsers
 {
     use PasswordValidationRules;
 
-    private $privateKey = "Aes_256";
+    private $privateKey = "79504f4c655949337a415a74";
     private $url = "http://127.0.0.1:8001/api/";
     private $driverEP = "newDriver";
     private $clienteEP = "newClient";
     private $loginEP = "login";
     private $accessToken = "";
     private $tokenType = "";
-    private $email = "mex@admin.com";
+    private $email = "prueba@prueba.com";
     private $password = "secret123";
     /**
      * Validate and create a newly registered user.
@@ -61,25 +61,46 @@ class CreateNewUser implements CreatesNewUsers
             'password' => $this->passwordRules(),
         ])->validate();
 
-        $response = Http::withHeaders([
-            'content-type' => 'application/json',
-            'Accept' => 'application/json',
-            'Authorization' => $this->getAuthorization(),
-        ])->get($this->url . $this->clienteEP);
-
         $user = User::create([
             'name' => $input['name'],
             'email' => $input['email'],
             'phone' => $input['phone'],
+            'role_id' => $input['role'],
             'password' => Hash::make($input['password']),
         ]);
 
-        $client = $response->json();
-        $sagmCredential = new SagmCredential();
-        $sagmCredential->user_token = $client['client_token'];
-        $sagmCredential->access_token = AesCrypt::encrypt($client['access_token'], bin2hex($this->privateKey));
-        $sagmCredential->user_id = $user->id;
-        $sagmCredential->save();
+        if($input['role'] == 1){
+            $response = Http::withHeaders([
+                'content-type' => 'application/json',
+                'Accept' => 'application/json',
+                'Authorization' => $this->getAuthorization(),
+            ])->get($this->url . $this->clienteEP);
+
+            $client = $response->json();
+            $sagmCredential = new SagmCredential();
+            $sagmCredential->user_token = $client['client_token'];
+            $sagmCredential->access_token = AesCrypt::encrypt($client['access_token'], $this->privateKey);
+            $sagmCredential->user_id = $user->id;
+            $sagmCredential->save();
+
+        }else if($input['role'] == 2){
+            $response = Http::withHeaders([
+                'content-type' => 'application/json',
+                'Accept' => 'application/json',
+                'Authorization' => $this->getAuthorization(),
+            ])->get($this->url . $this->driverEP);
+
+            $driver = $response->json();
+            $sagmCredential = new SagmCredential();
+            $sagmCredential->user_token = $driver['driver_token'];
+            $sagmCredential->access_token = AesCrypt::encrypt($driver['access_token'], $this->privateKey);
+            $sagmCredential->user_id = $user->id;
+            $sagmCredential->save();
+
+        }else{
+
+        }
+
 
         return $user;
     }

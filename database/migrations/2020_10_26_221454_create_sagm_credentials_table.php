@@ -18,6 +18,7 @@ class CreateSagmCredentialsTable extends Migration
             $table->string('user_token');
             $table->string('access_token');
             $table->foreignId('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
         });
     }

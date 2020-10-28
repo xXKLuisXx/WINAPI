@@ -9,8 +9,8 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
-use Role;
-use SagmCredential;
+use App\Models\Role;
+use App\Models\SagmCredential;
 
 class User extends Authenticatable
 {
@@ -29,6 +29,7 @@ class User extends Authenticatable
         'name',
         'email',
         'phone',
+        'role_id',
         'password',
     ];
 
@@ -67,6 +68,6 @@ class User extends Authenticatable
     }
 
     public function role(){
-        return $this->hasOne(Role::class);
+        return $this->belongsTo(Role::class);
     }
 }

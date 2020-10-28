@@ -32,6 +32,7 @@ class AesCrypt extends Model
         $iv = substr($encodedInitialData, 0, 16);
         $encodedInitialData = substr($encodedInitialData, 16);
         $decrypted = openssl_decrypt($encodedInitialData, 'AES-256-CBC', hex2bin($key256), 1, $iv);
+        
         return $decrypted;
     }
 }
