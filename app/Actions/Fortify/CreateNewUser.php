@@ -7,23 +7,21 @@ use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Laravel\Fortify\Contracts\CreatesNewUsers;
-use App\Models\Role;
 use App\Models\SagmCredential;
-use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Http;
 
 class CreateNewUser implements CreatesNewUsers
 {
     use PasswordValidationRules;
 
-    private $privateKey = "79504f4c655949337a415a74";
+    private $privateKey = "44745559505951506b633750";
     private $url = "http://127.0.0.1:8001/api/";
     private $driverEP = "newDriver";
     private $clienteEP = "newClient";
     private $loginEP = "login";
     private $accessToken = "";
     private $tokenType = "";
-    private $email = "prueba@prueba.com";
+    private $email = "mex@admin.com";
     private $password = "secret123";
     /**
      * Validate and create a newly registered user.
@@ -98,9 +96,8 @@ class CreateNewUser implements CreatesNewUsers
             $sagmCredential->save();
 
         }else{
-
+            
         }
-
 
         return $user;
     }
