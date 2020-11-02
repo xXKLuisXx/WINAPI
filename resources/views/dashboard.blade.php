@@ -23,6 +23,12 @@
                     <div>
                         {{ App\Models\AesCrypt::decrypt(Auth::user()->sagmCredential->access_token, "44745559505951506b633750") }}
                     </div>
+                    <form action="{{ url('/oxxo_charge') }}" method="POST">
+                        @csrf
+                        <label for="amount">Monto</label>
+                        <input name="amount" type="number">
+                        <button type="submit">Crear cargo</button>
+                    </form>
                 </div>
             </div>
         </div>

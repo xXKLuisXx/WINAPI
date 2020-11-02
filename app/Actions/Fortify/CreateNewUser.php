@@ -3,6 +3,7 @@
 namespace App\Actions\Fortify;
 
 use App\Models\AesCrypt;
+use App\Models\Authentication;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -13,45 +14,15 @@ use Illuminate\Support\Facades\Http;
 class CreateNewUser implements CreatesNewUsers
 {
     use PasswordValidationRules;
-
-    private $privateKey = "44745559505951506b633750";
-    private $url = "http://127.0.0.1:8001/api/";
-    private $driverEP = "newDriver";
-    private $clienteEP = "newClient";
-    private $loginEP = "login";
-    private $accessToken = "";
-    private $tokenType = "";
-    private $email = "mex@admin.com";
-    private $password = "secret123";
     /**
      * Validate and create a newly registered user.
      *
      * @param  array  $input
      * @return \App\Models\User
     */
-
-    private function getAuthToken(){
-        $response = Http::withHeaders([
-            'content-type' => 'application/json',
-            'Accept' => 'application/json'
-        ])->post($this->url.$this->loginEP, [
-            'email' => $this->email,
-            'password' => $this->password
-        ]);
-
-        $authTokens = $response->json();
-        $this->accessToken = $authTokens['access_token'];
-        $this->tokenType = $authTokens['token_type'];
-    }
-
-    private function getAuthorization(){
-        if($this->tokenType == null && $this->accessToken == null) {
-            $this->getAuthToken();
-        }
-        return $this->tokenType." ".$this->accessToken;
-    }
     public function create(array $input)
     {
+        $auth = new Authentication("mex@admin.com", "secret123");
         Validator::make($input, [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
@@ -71,8 +42,8 @@ class CreateNewUser implements CreatesNewUsers
             $response = Http::withHeaders([
                 'content-type' => 'application/json',
                 'Accept' => 'application/json',
-                'Authorization' => $this->getAuthorization(),
-            ])->get($this->url . $this->clienteEP);
+                'Authorization' => $auth->getAuthorization(),
+            ])->get($auth->getURL() . $auth->getClientEP());
 
             $client = $response->json();
             $sagmCredential = new SagmCredential();
@@ -85,8 +56,8 @@ class CreateNewUser implements CreatesNewUsers
             $response = Http::withHeaders([
                 'content-type' => 'application/json',
                 'Accept' => 'application/json',
-                'Authorization' => $this->getAuthorization(),
-            ])->get($this->url . $this->driverEP);
+                'Authorization' => $auth->getAuthorization(),
+            ])->get($auth->getURL() . $auth->getDriverEP());
 
             $driver = $response->json();
             $sagmCredential = new SagmCredential();

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\OxxoPaymentController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,3 +21,6 @@ Route::get('/', function () {
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
+
+
+Route::post('/oxxo_charge', [OxxoPaymentController::class, 'oxxo_payment_charge'])->middleware(['auth:sanctum', 'verified']);
