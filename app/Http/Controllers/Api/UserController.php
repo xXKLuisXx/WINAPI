@@ -13,8 +13,6 @@ class UserController extends Controller
     private $private_key = "44745559505951506b633750";
 
     public function getUser(Request $request){
-        return response()->json(["error" => "can´t resolve host request"], 200);
-        /*
         $user_token = $request->user_token;
         $sagmCredentials = SagmCredential::all()->where('user_token', $user_token)->first();
 
@@ -26,7 +24,5 @@ class UserController extends Controller
         }
 
         return response()->json(["error" => "can´t resolve host request"], 400);
-        */
-        
     }
 }
