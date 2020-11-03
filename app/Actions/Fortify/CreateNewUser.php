@@ -20,6 +20,8 @@ class CreateNewUser implements CreatesNewUsers
      * @param  array  $input
      * @return \App\Models\User
     */
+    private $privateKey = "574b454c53326e7069634f4d";
+
     public function create(array $input)
     {
         $auth = new Authentication("mex@admin.com", "secret123");
