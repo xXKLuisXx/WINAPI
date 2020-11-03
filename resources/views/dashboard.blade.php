@@ -21,7 +21,7 @@
                         <h2 class="font-semibold text-xl text-gray-800 leading-tight">Access Token</h2>
                     </div>
                     <div>
-                        {{ App\Models\AesCrypt::decrypt(Auth::user()->sagmCredential->access_token, "44745559505951506b633750") }}
+                        {{ App\Models\AesCrypt::decrypt(Auth::user()->sagmCredential->access_token, "574b454c53326e7069634f4d") }}
                     </div>
                     <form action="{{ url('/oxxo_charge') }}" method="POST">
                         @csrf

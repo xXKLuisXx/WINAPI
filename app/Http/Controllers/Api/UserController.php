@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 class UserController extends Controller
 {
     //
-    private $private_key = "44745559505951506b633750";
+    private $private_key = "574b454c53326e7069634f4d";
 
     public function getUser(Request $request){
         $user_token = $request->user_token;
