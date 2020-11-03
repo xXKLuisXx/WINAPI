@@ -10,7 +10,7 @@ class Authentication extends Model
 {
     use HasFactory;
     private $privateKey = "44745559505951506b633750";
-    private $url = "http://127.0.0.1:8000/api/";
+    private $url = "https://winmexico.net/api/";
     private $driverEP = "newDriver";
     private $clienteEP = "newClient";
     private $oxxoPaymentEP = "oxxo_pay";
