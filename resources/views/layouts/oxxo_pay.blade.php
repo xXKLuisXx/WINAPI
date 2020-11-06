@@ -9,6 +9,7 @@
     <title>Ficha digital</title>
 </head>
 <body>
+    
     <div class="opps">
         <div class="opps-header">
             <div class="opps-reminder">Ficha digital. No es necesario imprimir.</div>
@@ -16,7 +17,7 @@
                 <div class="opps-brand"><img src="{{ asset('images/oxxopay_brand.png')}}" alt="OXXOPay"></div>
                 <div class="opps-ammount">
                     <h3>Monto a pagar</h3>
-                    <h2>$ {{ $response['amount']/100 }} <sup> {{ $response['currency'] }}</sup></h2> <!-- Monto a pagar -->
+                    <h2>$ {{ $response->amount/100 }} <sup> {{ $response->currency }}</sup></h2> <!-- Monto a pagar -->
                     <p>OXXO cobrará una comisión adicional al momento de realizar el pago.</p>
                 </div>
             </div>
@@ -37,7 +38,6 @@
             <div class="opps-footnote">Al completar estos pasos recibirás un correo de <strong> <!-- Nombre del negocio --> </strong> confirmando tu pago.</div>
         </div>
     </div>
-    
     {{ dd($response) }}
 </body>
 </html>
