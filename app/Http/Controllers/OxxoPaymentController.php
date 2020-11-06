@@ -20,7 +20,7 @@ class OxxoPaymentController extends Controller
         ])->post($auth->getURL() . $auth->getOxxoPaymentEP() ,[
             'driver_token' => Auth::user()->sagmCredential->user_token,
             'driver_access_token' => AesCrypt::decrypt(Auth::user()->sagmCredential->access_token, "574b454c53326e7069634f4d"),
-            'amount' => $request->input('amount')
+            'amount' => $request->input('amount')*100
         ]);
         return view('layouts.oxxo_pay')->with('response', $response);
     }

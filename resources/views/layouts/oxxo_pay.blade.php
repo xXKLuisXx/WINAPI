@@ -17,13 +17,13 @@
                 <div class="opps-brand"><img src="{{ asset('images/oxxopay_brand.png')}}" alt="OXXOPay"></div>
                 <div class="opps-ammount">
                     <h3>Monto a pagar</h3>
-                    <h2>$ 0,000.00 <sup>MXN</sup></h2> <!-- Monto a pagar -->
+                    <h2>$ {{ $response->amount/100 }} <sup> {{ $response->currency }}</sup></h2> <!-- Monto a pagar -->
                     <p>OXXO cobrará una comisión adicional al momento de realizar el pago.</p>
                 </div>
             </div>
             <div class="opps-reference">
                 <h3>Referencia</h3>
-                <h1>0000-0000-0000-00</h1> <!-- Referencia -->
+                <h1>{{ $payment->charges->data }}</h1> <!-- Referencia -->
             </div>
         </div>
         <div class="opps-instructions">
