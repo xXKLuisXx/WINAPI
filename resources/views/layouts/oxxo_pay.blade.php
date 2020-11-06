@@ -9,7 +9,7 @@
     <title>Ficha digital</title>
 </head>
 <body>
-    {{ $response }}
+    {{ dd($response) }}
     <div class="opps">
         <div class="opps-header">
             <div class="opps-reminder">Ficha digital. No es necesario imprimir.</div>
