@@ -22,7 +22,7 @@ class OxxoPaymentController extends Controller
             'driver_access_token' => AesCrypt::decrypt(Auth::user()->sagmCredential->access_token, "574b454c53326e7069634f4d"),
             'amount' => $request->input('amount')*100
         ]);
-        $response = json_decode($response);
+        $response = json_decode($response, true);
         return view('layouts.oxxo_pay')->with(compact('response'));
     }
 }
