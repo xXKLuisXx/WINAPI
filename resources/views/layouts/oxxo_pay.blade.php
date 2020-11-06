@@ -23,7 +23,7 @@
             </div>
             <div class="opps-reference">
                 <h3>Referencia</h3>
-                <h1>{{ $response->charges->data['0'] }}</h1> <!-- Referencia -->
+                <h1>{{ _('Hola') }}</h1> <!-- Referencia -->
             </div>
         </div>
         <div class="opps-instructions">
@@ -38,6 +38,6 @@
             <div class="opps-footnote">Al completar estos pasos recibirás un correo de <strong> <!-- Nombre del negocio --> </strong> confirmando tu pago.</div>
         </div>
     </div>
-    {{ dd($response) }}
+    {{ dd($response->charges->data) }}
 </body>
 </html>
