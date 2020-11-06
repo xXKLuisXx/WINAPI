@@ -38,6 +38,6 @@
             <div class="opps-footnote">Al completar estos pasos recibirás un correo de <strong> <!-- Nombre del negocio --> </strong> confirmando tu pago.</div>
         </div>
     </div>
-    {{ dd($response->charges->data[0]) }}
+    {{ dd($response->charges->data['0']) }}
 </body>
 </html>
