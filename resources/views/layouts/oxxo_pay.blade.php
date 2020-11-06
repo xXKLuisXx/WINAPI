@@ -9,7 +9,6 @@
     <title>Ficha digital</title>
 </head>
 <body>
-    {{ dd($response) }}
     <div class="opps">
         <div class="opps-header">
             <div class="opps-reminder">Ficha digital. No es necesario imprimir.</div>
@@ -38,5 +37,7 @@
             <div class="opps-footnote">Al completar estos pasos recibirás un correo de <strong> <!-- Nombre del negocio --> </strong> confirmando tu pago.</div>
         </div>
     </div>
+    
+    {{ dd($response) }}
 </body>
 </html>
