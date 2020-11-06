@@ -23,7 +23,7 @@
             </div>
             <div class="opps-reference">
                 <h3>Referencia</h3>
-                <h1>{{ _('Hola')  }}</h1> <!-- Referencia -->
+                <h1>{{ $response->charges->data['0']['payment_method']['reference']  }}</h1> <!-- Referencia -->
             </div>
         </div>
         <div class="opps-instructions">
